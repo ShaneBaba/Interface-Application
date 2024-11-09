@@ -1,18 +1,29 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employment Application</title>
+    
+    <img src="UNFinished Business.png" alt="Unfinished Business Logo" class="logo">
+    
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #022e62;
             margin: 0;
             padding: 0;
         }
+        .logo {
+    		width: 1000;
+    		height: auto; 
+    		display: block; 
+    		margin: 0 auto; 
+    		padding-top: 20px;
+}
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 50px auto;
             background: #fff;
             padding: 20px;
@@ -26,9 +37,10 @@
         label {
             display: block;
             margin: 15px 0 5px;
+          
         }
         input, select, textarea {
-            width: 100%;
+            width: 95%;
             padding: 10px;
             margin: 5px 0 20px;
             border: 1px solid #ccc;
@@ -37,247 +49,417 @@
         textarea {
             resize: vertical;
         }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
         button {
-            display: block;
-            width: 50%;
-            margin: auto;
-            padding: 15px;
+            width: 48%;
+            padding: 10px;
             background-color: #022e62;
             color: white;
             border: none;
-            border-radius: 2px;
-            font-size: 12px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
         }
         button:hover {
-            background-color: #022e62;
+            background-color: #0353a4;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .add-button {
+            display: block;
+            width: 50%;
+            margin: 10px auto;
+            padding: 10px;
+            background-color: #ccc;
+            color: #333;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .add-button:hover {
+            background-color: #bbb;
+        }
+        .entry {
+            position: relative;
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            background-color: white;
+        }
+        .remove-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+            font-size: 18px;
+            line-height: 0.8;
+            text-align: center;
+        }
+        .remove-button:hover {
+            background-color: #d32f2f;
         }
     </style>
-    <script>
-
-function initializeForm() {
-  const states = ["Select State", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
-
-    let shippingState = document.getElementById("shippingState");
-    let shippingState2 = document.getElementById("shippingState2");
-
-        states.forEach(state => {
-        let option = new Option(state, state);
-        shippingState.add(option.cloneNode(true));
-        shippingState2.add(option.cloneNode(true));
-
-    });
-}
-
-function addEducationEntry() {
-    const educationSection = document.getElementById('education');
-    const educationEntry = document.createElement('div');
-    educationEntry.className = 'education-entry';
-    educationEntry.innerHTML = `
-        <label for="school-type">School Type</label>
-        <select name="school-type" required>
-            <option value="highschool">High School</option>
-            <option value="associates">Associate's Degree</option>
-            <option value="bachelors">Bachelor's Degree</option>
-            <option value="masters">Master's Degree</option>
-            <option value="phd">Doctorate (Ph.D.)</option>
-        </select>
-
-        <label for="school-name">School Name</label>
-        <input type="text" name="school-name" required>
-
-        <label for="major-degree">Major/Degree</label>
-        <input type="text" name="major-degree" required>
-
-        <label for="city-state">City/State</label>
-        <input type="text" name="city-state" required>
-
-        <label for="graduation-date">Graduation Date</label>
-        <input type="date" name="graduation-date" required>
-
-    `;
-    educationSection.appendChild(educationEntry);
-}
-
-
-        function addReference() {
-            const referencesDiv = document.getElementById('references');
-            const referenceEntry = document.createElement('div');
-            referenceEntry.innerHTML = `
-                <label for="reference">Reference</label>
-                <input type="text" placeholder="Name, Title, Company, Phone, Email" required>
-            `;
-            referencesDiv.appendChild(referenceEntry);
-        }
-
-        function addJobEntry() {
-            const workExperienceDiv = document.getElementById('work-experience');
-            const jobEntry = document.createElement('div');
-            jobEntry.innerHTML = `
-                <label>Company Name</label>
-                <input type="text" required>
-
-                <label>Position Title</label>
-                <input type="text" required>
-
-                <label>Start Date</label>
-                <input type="date" required>
-
-                <label>End Date</label>
-                <input type="date">
-
-                <label>List Duties</label>
-                <textarea rows="3" required></textarea>
-            `;
-            workExperienceDiv.appendChild(jobEntry);
-        }
-    </script>
 </head>
 <body onload="initializeForm()">
 
-
 <div class="container">
+
+	
     <h1>Employment Application</h1>
-    <form action="/submit" method="POST">
-        <label for="fname">First Name</label>
-        <input type="text" id="fname" name="fname" required>
+    <form id="applicationForm">
+    
+        <!-- Personal Information Section -->
+        <div class="section active" id="section-1">
+            <h2>Personal Information</h2>
+            
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" required>
+            
+            <label for="mname">Middle Name</label>
+            <input type="text" id="mname" name="mname">
 
-        <label for="mname">Middle Name</label>
-        <input type="text" id="mname" name="mname">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" required>
 
-        <label for="lname">Last Name</label>
-        <input type="text" id="lname" name="lname" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            
+            <label for="street">Street Address</label>
+            <input type="text" id="street" name="street" required>
+            
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required>
+            
+            <label for="state">State</label>
+            <input type="text" id="state" name="state" required>
+            
+            <label for="zip">Zipcode</label>
+            <input type="text" id="zip" name="zip" required>
+            
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" name="phone" required>
+            
+            <label for="ssn">Social Security Number</label>
+            <input type="text" id="ssn" name="ssn" required>
+            
+            <label for="applied">Position applied for</label>
+            <input type="text" id="applied" name="applied" required>
+                 
+            <label for="salary">Desired Salary</label>
+            <input type="text" id="salary" name="salary" required>
+            
+           
+   			<label>Are you applying for a part-time or full-time position?</label>
+    		<br>
+   			Part-Time <input type="radio" id="job-part-time" name="job-type" value="part-time" required>
+   			<br>
+    		Full-Time &nbsp;<input type="radio" id="job-full-time" name="job-type" value="full-time" required>
+            
+            <div class="button-group">
+            	&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button type="button" onclick="saveAndContinue(2)">Save and Continue</button>
+                
+            </div>
+        </div>
+        
+        
 
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required>
+        <!-- Emergency Contact Section -->
+        <div class="section" id="section-2">
+            <h2>Emergency Contact</h2>
+            <label for="emergency-name"> First Name</label>
+            <input type="text" id="emergency-name" name="emergency-name" required>
+            
+            <label for="emergency-middle-name"> Middle Name</label>
+            <input type="text" id="emergency-middle-name" name="emergency-middle-name">
 
-        <label for="pnum">Phone Number</label>
-        <input type="tel" id="pnum" name="pnum" required>
-
-        <label for="address">Street Address</label>
-        <input type="text" id="address" name="address" placeholder="1234 UNF Dr" required>
-
-        <label for="city">City</label>
-        <input type="text" id="city" name="city" required>
-
-        <!--STATE DROPDOWN-->
-        <label for="shippingState">State</label>
-        <select id="shippingState" required></select>
-
-        <label for="zcode">Zip Code</label>
-        <input type="text" id="zcode" name="zcode" required>
-
-        <label for="ssn">SSN</label>
-        <input type="text" id="ssn" name="ssn" required>
-
-        <label for="position">Position Applied For</label>
-        <input type="text" id="position" name="position" required>
-
-        <label for="salary">Desired Salary</label>
-        <input type="text" id="salary" name="salary" required>
-
-        <h2>Employment Type</h2>
-        <input type="radio" id="full-time" name="employment-type" value="full-time" required>
-        <label for="full-time">Full-Time</label>
-
-        <input type="radio" id="part-time" name="employment-type" value="part-time" required>
-        <label for="part-time">Part-Time</label>
+			<label for="emergency-last-name"> Last Name</label>
+            <input type="text" id="emergency-last-name" name="emergency-last-name" required>
 
 
-        <!--EMERGENCY-->
-        <h2>Emergency Contact</h2>
-        <label for="efname">First Name</label>
-        <input type="text" id="efname" name="efname" required>
+            <label for="emergency-phone">Phone</label>
+            <input type="tel" id="emergency-phone" name="emergency-phone" required>
+            
+            <label for="emergency-street">Street Address</label>
+            <input type="text" id="emergency-street" name="emergency-street" required>
+            
+            <label for="emergency-city">City</label>
+            <input type="text" id="emergency-city" name="emergency-city" required>
+            
+            <label for="emergency-state">State</label>
+            <input type="text" id="emergency-state" name="emergency-state" required>
+            
+            <label for="emergency-zip">Zipcode</label>
+            <input type="text" id="emergency-zip" name="emergency-zip" required>
+            
 
-        <label for="emname">Middle Name</label>
-        <input type="text" id="emname" name="emname">
+            <div class="button-group">
+                <button type="button" onclick="saveAndContinue(1)">Back</button>
+                <button type="button" onclick="saveAndContinue(3)">Save and Continue</button>
+            </div>
+        </div>
 
-        <label for="elname">Last Name</label>
-        <input type="text" id="elname" name="elname" required>
+        <!-- Education Section -->
+        <div class="section" id="section-3">
+            <h2>Education</h2>
+            <div id="education-section">
+                <div class="entry">
+                    <label for="school-name">School Name</label>
+                    <input type="text" name="school-name[]" required>
 
-        <label for="emergency-mobile">Phone Number</label>
-        <input type="tel" id="emergency-mobile" name="emergency-mobile" required>
+                    <label for="degree">Degree</label>
+                    <input type="text" name="degree[]" required>
 
-        <label for="emergency-email">Email Address</label>
-        <input type="email" id="emergency-email" name="emergency-email" required>
+                    <label for="city-state">City/State</label>
+                    <input type="text" name="city-state[]" required>
 
-        <label for="emergency-address">Street Address</label>
-        <input type="text" id="emergency-address" name="emergency-address" placeholder="1234 UNF Dr" required>
+                    <label for="graduation-date">Graduation Date</label>
+                    <input type="date" name="graduation-date[]" required>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addEducationEntry()">Add More Education</button>
 
-        <label for="ecity">City</label>
-        <input type="text" id="ecity" name="ecity" required>
+            <div class="button-group">
+                <button type="button" onclick="saveAndContinue(2)">Back</button>
+                <button type="button" onclick="saveAndContinue(4)">Save and Continue</button>
+            </div>
+        </div>
 
-        <label for="shippingState2">State</label>
-        <select id="shippingState2" required></select>
+        <!-- Work Experience Section -->
+        <div class="section" id="section-4">
+            <h2>Work Experience</h2>
+            <div id="work-experience-section">
+                <div class="entry">
+                    <label for="company-name">Company Name</label>
+                    <input type="text" name="company-name[]" required>
 
-        <label for="ezcode">Zip Code</label>
-        <input type="text" id="ezcode" name="ezcode" required>
+                    <label for="position">Position</label>
+                    <input type="text" name="position[]" required>
 
-        <h2>Education</h2>
+                    <label for="duties">Duties</label>
+                    <textarea name="duties[]" rows="3" required></textarea>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addWorkExperienceEntry()">Add More Work Experience</button>
 
-        <label for="school-type">School Type</label>
-        <select name="school-type" required>
-            <option value="highschool">High School</option>
-            <option value="associates">Associate's Degree</option>
-            <option value="bachelors">Bachelor's Degree</option>
-            <option value="masters">Master's Degree</option>
-            <option value="phd">Doctorate (Ph.D.)</option>
-        </select>
+            <div class="button-group">
+                <button type="button" onclick="saveAndContinue(3)">Back</button>
+                <button type="button" onclick="saveAndContinue(5)">Save and Continue</button>
+            </div>
+        </div>
 
-        <label for="school-name">School Name</label>
-        <input type="text" name="school-name" required>
+        <!-- References Section -->
+        <div class="section" id="section-5">
+            <h2>References</h2>
+            <div id="references-section">
+                <div class="entry">
+                    <label for="reference-name">Reference Name</label>
+                    <input type="text" name="reference-name[]" required>
 
-        <label for="major-degree">Major/Degree</label>
-        <input type="text" name="major-degree" required>
+                    <label for="reference-title">Title</label>
+                    <input type="text" name="reference-title[]" required>
 
-        <label for="city-state">City/State</label>
-        <input type="text" name="city-state" required>
+                    <label for="reference-company">Company</label>
+                    <input type="text" name="reference-company[]" required>
 
-        <label for="graduation-date">Graduation Date</label>
-        <input type="date" name="graduation-date" required>
+                    <label for="reference-phone">Phone</label>
+                    <input type="tel" name="reference-phone[]" required>
 
-        <div id="education"></div>
-        <button type="button" onclick="addEducationEntry()">Add Education</button>
+                    <label for="reference-email">Email</label>
+                    <input type="email" name="reference-email[]" required>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addReferenceEntry()">Add More References</button>
 
-        <h2>Work Experience</h2>
+            <div class="button-group">
+                <button type="button" onclick="saveAndContinue(4)">Back</button>
+                <button type="button" onclick="saveAndContinue(6)">Save and Continue</button>
+            </div>
+        </div>
 
-        <label>Company Name</label>
-                <input type="text" required>
+        <!-- Veteran Status Section -->
+        <div class="section" id="section-6">
+            <h2>Veteran Status</h2>
+            <label>Have you served in the military?</label>
+            <br>
+            Yes<input type="radio" id="vet-yes" name="vet" value="yes" required> 
+            <br>
+            No&nbsp;<input type="radio" id="vet-no" name="vet" value="no" required> 
 
-                <label>Position Title</label>
-                <input type="text" required>
+            <div class="button-group">
+                <button type="button" onclick="saveAndContinue(5)">Back</button>
+                <button type="button" onclick="saveAndContinue(7)">Save and Continue</button>
+            </div>
+        </div>
 
-                <label>Start Date</label>
-                <input type="date" required>
+        <!-- Signature Section -->
+        <div class="section" id="section-7">
+            <h2>Signature</h2>
+            <p> Accepting this application or employment by UNFinished Business (UNFB) does not create or imply an employment contract. It also does not allow the right to remain employed by UNFB. It also does not change my and UNFB’s employment-at-will relationship. The relationship cannot be changed except by a written contract from the President of UNFB. 
+UNFB or I can end employment without cause or warning. If hired, I agree that UNFB might make changes that reduce my benefits. 
+I agree to let UNFB investigate the information provided. Employment can be ended without warning if any information is false or incomplete. I allow UNFB to contact any people or groups listed unless stated otherwise. I also release UNFB from any damage from such contact. 
+I also know that UNFB has a drug and alcohol policy with pre- and post-employment testing. I must comply to be employed. I must pass the testing to continue employment. I may also need to pass job-related physical tests to continue working. 
+I know that UNFB may ask for a report from a consumer reporter. This may include my credit and traits. At my written request, UNFB will provide the information from any such report, as required by law. 
+I also agree that my employment with UNFB is probationary for 60 days. At any time during or after the probation, my employment with UNFB can be ended for any reason by myself or UNFB. 
+            </p>
+            <label for="signature">Please sign:</label>
+            <input type="text" id="signature" name="signature" placeholder="Type your name" required>
 
-                <label>End Date</label>
-                <input type="date">
-
-                <label>List Duties</label>
-                <textarea rows="3" required></textarea>
-
-        <div id="work-experience"></div>
-        <button type="button" onclick="addJobEntry()">Add Work Experience</button>
-
-        <h2>References</h2>
-
-        <label for="reference">Reference</label>
-        <input type="text" placeholder="Name, Title, Company, Phone, Email" required>
-
-        <div id="references"></div>
-        <button type="button" onclick="addReference()">Add Reference</button>
-
-        <h2>VET Questions</h2>
-        <label>Have you served in the military?</label>
-        <input type="radio" name="vet" value="yes" required> Yes
-        <input type="radio" name="vet" value="no" required> No
-
-        <h2>Signature</h2>
-        <label for="signature">Please sign:</label>
-        <input type="text" id="signature" name="signature" placeholder="Type your name" required>
-
-        <button type="submit">Submit Application</button>
+            <div class="button-group">
+                <button type="button" onclick="saveAndContinue(6)">Back</button>
+                <button type="submit">Submit Application</button>
+            </div>
+        </div>
     </form>
 </div>
+
+<script>
+    function initializeForm() {
+        loadFormData();
+        showSection(1);
+    }
+
+    function showSection(sectionNumber) {
+        const sections = document.getElementsByClassName('section');
+        for (let i = 0; i < sections.length; i++) {
+            sections[i].classList.remove('active');
+        }
+        document.getElementById('section-' + sectionNumber).classList.add('active');
+    }
+
+    function saveFormData() {
+        const formElements = document.getElementById('applicationForm').elements;
+        for (let element of formElements) {
+            if (element.name) {
+                localStorage.setItem(element.name, element.value);
+            }
+        }
+    }
+
+    function loadFormData() {
+        const formElements = document.getElementById('applicationForm').elements;
+        for (let element of formElements) {
+            if (element.name && localStorage.getItem(element.name)) {
+                element.value = localStorage.getItem(element.name);
+            }
+        }
+    }
+
+    function saveAndContinue(nextSection) {
+    if (validateSection()) {
+        saveFormData();
+        showSection(nextSection);
+    } else {
+        alert("Please fill out all required fields before continuing.");
+    }
+}
+
+function validateSection() {
+    const currentSection = document.querySelector('.section.active');
+    const inputs = currentSection.querySelectorAll('input[required], select[required], textarea[required]');
+
+    for (let input of inputs) {
+        if (!input.value) {
+            input.focus();
+            return false; // Found an empty required field
+        }
+    }
+    return true; // All required fields are filled
+}
+
+    // Add and Remove Education Entry
+    function addEducationEntry() {
+        const container = document.getElementById('education-section');
+        const entry = document.createElement('div');
+        entry.classList.add('entry');
+        entry.innerHTML = `
+            <button type="button" class="remove-button" onclick="removeEntry(this)">×</button>
+            <label for="school-name">School Name</label>
+            <input type="text" name="school-name[]" required>
+
+            <label for="degree">Degree</label>
+            <input type="text" name="degree[]" required>
+
+            <label for="city-state">City/State</label>
+            <input type="text" name="city-state[]" required>
+
+            <label for="graduation-date">Graduation Date</label>
+            <input type="date" name="graduation-date[]" required>
+        `;
+        container.appendChild(entry);
+    }
+
+    // Add and Remove Work Experience Entry
+    function addWorkExperienceEntry() {
+        const container = document.getElementById('work-experience-section');
+        const entry = document.createElement('div');
+        entry.classList.add('entry');
+        entry.innerHTML = `
+            <button type="button" class="remove-button" onclick="removeEntry(this)">×</button>
+            <label for="company-name">Company Name</label>
+            <input type="text" name="company-name[]" required>
+
+            <label for="position">Position</label>
+            <input type="text" name="position[]" required>
+
+            <label for="duties">Duties</label>
+            <textarea name="duties[]" rows="3" required></textarea>
+        `;
+        container.appendChild(entry);
+    }
+
+    // Add and Remove Reference Entry
+    function addReferenceEntry() {
+        const container = document.getElementById('references-section');
+        const entry = document.createElement('div');
+        entry.classList.add('entry');
+        entry.innerHTML = `
+            <button type="button" class="remove-button" onclick="removeEntry(this)">×</button>
+            <label for="reference-name">Reference Name</label>
+            <input type="text" name="reference-name[]" required>
+
+            <label for="reference-title">Title</label>
+            <input type="text" name="reference-title[]" required>
+
+            <label for="reference-company">Company</label>
+            <input type="text" name="reference-company[]" required>
+
+            <label for="reference-phone">Phone</label>
+            <input type="tel" name="reference-phone[]" required>
+
+            <label for="reference-email">Email</label>
+            <input type="email" name="reference-email[]" required>
+        `;
+        container.appendChild(entry);
+    }
+
+    function removeEntry(button) {
+        button.parentElement.remove();
+    }
+
+    document.getElementById('applicationForm').addEventListener('submit', function() {
+        localStorage.clear();
+        alert("Application Submitted!");
+    });
+</script>
 
 </body>
 </html>
